@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>demo-netty</module>
+  	<module>demo-slf4j</module>
   </modules>
 </project>
