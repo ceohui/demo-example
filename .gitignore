@@ -1,5 +1,6 @@
-demo-netty/target
-demo-netty/.classpath
-demo-netty/.settings
 .settings
 .project
+.classpath
+.idea
+target/*
+*.iml

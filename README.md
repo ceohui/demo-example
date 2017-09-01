@@ -1,3 +1,12 @@
-1.Git Bash 进入命令行，进入项目所在目录
-2.输入 touch .gitignore 在文件夹就生成了一个“.gitignore”文件
-3. vim 来操作
+
+# demo集合
+
+## demo-queue-kafka:kafka消息队列
+
+## demo-collections:Java集合类
+queue
+生产者消费者
+优先级队列
+
+## demo-design-pattern:设计模式
+过滤器
