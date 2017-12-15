@@ -16,6 +16,7 @@
         <module>demo-springboot-eureka</module>
         <module>demo-springboot-provider</module>
         <module>demo-springboot-consumer</module>
+        <module>demo-springboot-config</module>
     </modules>
 
     <dependencyManagement>
