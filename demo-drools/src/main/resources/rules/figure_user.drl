@@ -1,0 +1,48 @@
+package rules;
+
+import cn.zzh.demo.drools.redenvelope.RedEnvelopeModel
+import cn.zzh.demo.drools.redenvelope.Const;
+
+global cn.zzh.demo.drools.redenvelope.RuleResult ruleResult;
+
+
+// 距离上一次登录时间（天数）
+rule "10001"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureUser!=null && figureUser.loginGapDay > 100)
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), "太久没有登录");
+    end
+
+// 近30天每日活跃（天数）
+rule "10002"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureUser!=null && figureUser.recentActiveDay == 0)
+    then
+        ruleResult.saveResult(900, Const.RESULT_REJECT, drools.getRule().getName(), "近30天没有活跃");
+     end
+
+
+// 用户登录过的设备集合
+rule "10003"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureUser!=null && figureUser.loginDevices.size > 100)
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), "登录设备大于x个");
+    end
+
+// 设备不在登录列表中
+rule "10004"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureUser!=null && deviceId not memberOf figureUser.loginDevices)
+    then
+        ruleResult.saveResult(900, Const.RESULT_REJECT, drools.getRule().getName(), "设备不在登录设备的集合当中");
+    end

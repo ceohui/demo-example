@@ -1,0 +1,37 @@
+package rules;
+
+import cn.zzh.demo.drools.redenvelope.RedEnvelopeModel
+import cn.zzh.demo.drools.redenvelope.Const;
+
+global cn.zzh.demo.drools.redenvelope.RuleResult ruleResult;
+
+// 安装风险app
+rule "20001"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureDevice!=null && figureDevice.riskAppCount > 0)
+    then
+        ruleResult.saveResult(600, Const.RESULT_REVIEW, drools.getRule().getName(), "安装风险app");
+    end
+
+// 虚拟机
+rule "20002"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureDevice!=null && figureDevice.vmCount > 0)
+    then
+        ruleResult.saveResult(900, Const.RESULT_REJECT, drools.getRule().getName(), "虚拟机");
+     end
+
+
+// 篡改设备
+rule "20003"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureDevice!=null && figureDevice.tamperCount > 0)
+    then
+        ruleResult.saveResult(800, Const.RESULT_REJECT, drools.getRule().getName(), "篡改设备");
+    end

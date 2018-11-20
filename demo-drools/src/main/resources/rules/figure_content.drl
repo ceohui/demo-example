@@ -1,0 +1,48 @@
+package rules;
+
+import cn.zzh.demo.drools.redenvelope.RedEnvelopeModel
+import cn.zzh.demo.drools.redenvelope.Const;
+
+global cn.zzh.demo.drools.redenvelope.RuleResult ruleResult;
+
+// 录播收听
+rule "30001"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureContent==null || (figureContent.recListenDuration <= 10 && figureContent.recListenCount<=1 ))
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), null);
+    end
+
+// 直播收听
+rule "30002"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureContent==null || (figureContent.liveListenDuration <= 10 && figureContent.liveListenCount<=1 ))
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), null);
+     end
+
+
+// 评论互动
+rule "30003"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureContent==null || (figureContent.recCommentCount <=1 && figureContent.liveCommentCount<=1))
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), null);
+    end
+
+
+// 主播
+rule "30004"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureContent==null || (figureContent.recPublishCount <=1 && figureContent.livePublishCount<=1))
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), null);
+    end

@@ -1,0 +1,27 @@
+package rules;
+
+import cn.zzh.demo.drools.redenvelope.RedEnvelopeModel
+import cn.zzh.demo.drools.redenvelope.Const;
+
+global cn.zzh.demo.drools.redenvelope.RuleResult ruleResult;
+
+
+// 距离上一次登录时间（天数）
+rule "agenda_10001"
+    agenda-group "agenda_test"
+    activation-group "agenda_test"
+    when
+        eval(true)
+    then
+        ruleResult.saveResult(600, Const.RESULT_PASS, drools.getRule().getName(), "agenda_10001");
+    end
+
+// 近30天每日活跃（天数）
+rule "agenda_10002"
+    agenda-group "agenda_test"
+    activation-group "agenda_test"
+    when
+        eval(true)
+    then
+        ruleResult.saveResult(900, Const.RESULT_REJECT, drools.getRule().getName(), "agenda_10002");
+     end

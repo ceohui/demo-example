@@ -23,10 +23,19 @@
         <module>demo-javase</module>
         <module>demo-guava</module>
         <module>demo-drools</module>
+        <module>demo-db-neo4j</module>
+        <module>demo-util-uuid</module>
+        <module>demo-util-whois</module>
+        <module>demo-util-kuaishou</module>
+        <module>demo-security-api</module>
+        <module>demo-queue-rocketmq</module>
+        <module>demo-drools-rule</module>
+        <module>demo-drools-kiescanner</module>
+        <module>demo-captcha</module>
     </modules>
 
     <!-- 阿里云maven仓库 -->
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>public</id>
             <name>aliyun nexus</name>
@@ -48,7 +57,46 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
+    </pluginRepositories>-->
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central</name>
+            <url>http://maven.lizhi.fm:8081/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>codehaus-snapshots</id>
+            <name>Codehaus Snapshots</name>
+            <url>http://maven.lizhi.fm:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>http://maven.lizhi.fm:8081/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>release</id>
+            <url>http://maven.lizhi.fm:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://maven.lizhi.fm:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
     <dependencies>

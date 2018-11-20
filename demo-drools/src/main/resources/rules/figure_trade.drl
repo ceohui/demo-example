@@ -1,0 +1,18 @@
+package rules;
+
+import cn.zzh.demo.drools.redenvelope.RedEnvelopeModel
+import cn.zzh.demo.drools.redenvelope.Const;
+
+global cn.zzh.demo.drools.redenvelope.RuleResult ruleResult;
+
+// 红包收入占比
+rule "40001"
+    agenda-group "red"
+    lock-on-active true
+    when
+        $obj : RedEnvelopeModel(figureUser!=null && figureTrade.redEnvelopeIncomeScale > 0.8)
+    then
+        ruleResult.saveResult(700, Const.RESULT_REVIEW, drools.getRule().getName(), "红包收入占比过高");
+    end
+
+
